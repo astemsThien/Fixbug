@@ -15,6 +15,9 @@ import {CookieService} from 'ngx-cookie-service';
 import {GridUtilService} from '../../../shared/services/grid-util.service';
 import {CommonCodeService} from '../../../shared/services/common-code.service';
 import {APPCONSTANTS} from '../../../shared/constants/appconstants';
+import { ArrayType } from '@angular/compiler';
+import { result } from 'lodash';
+import * as path from 'path';
 
 @Component({
   selector: 'app-astems02',
@@ -38,6 +41,8 @@ export class Astems02Component implements OnInit {
   // Global
   G_TENANT: any;
 
+  // public showName = "an";
+
   mainFormData: MenuSearchVO = {} as MenuSearchVO;
 
   // grid
@@ -56,10 +61,11 @@ export class Astems02Component implements OnInit {
   changes3 = [];
   addFlg1 = false;
   addFlg2 = false;
-
   
   popupVisible = false;
-  // popupShow = true;
+public textThu ='';
+
+public anhien = 'an';
 
   GRID_STATE_KEY = 'mm_mmenu1';
   saveState1 = this.gridUtil.fnGridSaveState(this.GRID_STATE_KEY + '_1');
@@ -68,6 +74,8 @@ export class Astems02Component implements OnInit {
   loadState2 = this.gridUtil.fnGridLoadState(this.GRID_STATE_KEY + '_2');
   saveState3 = this.gridUtil.fnGridSaveState(this.GRID_STATE_KEY + '_3');
   loadState3 = this.gridUtil.fnGridLoadState(this.GRID_STATE_KEY + '_3');
+
+
 
   constructor(public utilService: CommonUtilService,
               private service: Astems02Service,
@@ -92,10 +100,10 @@ export class Astems02Component implements OnInit {
     this.changes1 = [];
     this.changes2 = [];
     this.changes3 = [];
-
     // 시스템타입
     this.codeService.getCode(this.G_TENANT, 'SYSTEMTYPE').subscribe(result => {
       this.dsSystemType = result.data;
+      
     });
 
     this.codeService.getCode(this.G_TENANT, 'ICON').subscribe(result => {
@@ -125,9 +133,9 @@ export class Astems02Component implements OnInit {
     this.utilService.getGridHeight(this.grid3);
   }
 
-  async onShow(e): Promise<void> {
-    this.popupVisible = true;
-  }
+  // async onShow(e): Promise<void> {
+  //   this.popupVisible = true;
+  // }
 
   // 조회
   async onSearch(): Promise<void>{
@@ -135,11 +143,14 @@ export class Astems02Component implements OnInit {
     this.dataSource2 = this.initGridWithEntityStore(this.entityStore2);
     this.dataSource3 = this.initGridWithEntityStore(this.entityStore3);
 
+
     this.changes1 = [];
     this.changes2 = [];
     this.changes3 = [];
-
     const data = this.mainForm.instance.validate();
+
+    const inputText2 = this.mainFormData.text2;
+console.log(inputText2);
 
     if (data.isValid) {
       const result = await this.service.getL1(this.mainFormData);
@@ -148,21 +159,43 @@ export class Astems02Component implements OnInit {
         this.utilService.notify_error(result.msg);
         return;
       } else {
-        this.grid1.instance.cancelEditData();
+        // so sanh gia tri nhap vao va hien thi thong bao
+        if (this.mainFormData.text1?.length && this.mainFormData.text1.trim() !== '') {
+          alert('Show you now: ' + this.mainFormData.text1);
         this.utilService.notify_success('search success');
 
+        }
+        // show anme va an hiện text
+        const resultArray = result?.data?.filter(path => path.text?.toLowerCase() === inputText2?.toLowerCase());
+                
+                console.log(resultArray);
+                if (resultArray.length != 0) {
+                    console.log('đúng ồi đó!!!!');
+                    this.textThu = resultArray[0].text;
+                    this.anhien = 'hien';
+                } else {
+                    this.textThu = '';
+                    this.anhien = 'an';
+
+                }
+
+        this.grid1.instance.cancelEditData();
+        this.popupVisible = true;
         this.entityStore1 = new ArrayStore(
           {
             data: result.data,
             key: this.key
           }
         );
+      
         this.dataSource1 = new DataSource({
           store: this.entityStore1
         });
 
+        
         this.grid1.focusedRowKey = null;
         this.grid1.paging.pageIndex = 0;
+     
       }
     }
   }

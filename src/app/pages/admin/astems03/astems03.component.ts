@@ -36,7 +36,7 @@ export class Astems03Component implements OnInit {
   drawInfoArr = [];
   infoWindow = null;
 
-  
+  popupVisible = false;
 
   weatherAddress: string;
   weather: any;
@@ -129,13 +129,18 @@ export class Astems03Component implements OnInit {
   }
 
   ngAfterViewInit(): void {
-
+    this.initMap();
     this.utilService.getFoldable(this.mainForm, this.foldableBtn);
     this.utilService.fnAccordionExpandAll(this.acrdn);  // 아코디언 모두 펼치기
     this.utilService.getGridHeight(this.subGrid,30);
-    this.initMap();
+    
     this.initForm();
   }
+
+  async onShow(e): Promise<any>{
+    this.popupVisible=true;
+
+  } 
 
   initMap(): void {
     // @ts-ignore
@@ -143,7 +148,7 @@ export class Astems03Component implements OnInit {
       // @ts-ignore
       center: new Tmapv2.LatLng(37.14662571373519, 127.5939137276295),
       width: '100%',
-      height: '100%',
+      height: '500px',
       zoom: 14,
       zoomControl: true,
       scrollwheel: true

@@ -66,7 +66,7 @@ export class Astems05Component implements OnInit, AfterViewInit {
     this.sMap.apiKey = {google: 'AIzaSyDI3ChJAmSoajg3HmNQNvIoViojmg7HOTo'};
     // this.sMap.center = '37.482489, 126.878240';
     this.sMap.zoom = 17;
-    this.sMap.height = 'calc( 100vh - 75px ) ';
+    this.sMap.height = 'calc( 500px) ';
     this.sMap.width = '100%';
 
     this.sMap.markers = 
@@ -78,6 +78,7 @@ export class Astems05Component implements OnInit, AfterViewInit {
       // },
     }];
   }
+
 
   ngAfterViewInit(): void {
     this.utilService.getFoldable(this.mainForm, this.foldableBtn);

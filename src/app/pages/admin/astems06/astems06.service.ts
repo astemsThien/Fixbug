@@ -1,4 +1,5 @@
 
+
 import {Injectable} from '@angular/core';
 import {APPCONSTANTS} from '../../../shared/constants/appconstants';
 import {JHttpService} from '../../../shared/services/jhttp.service';
@@ -8,7 +9,7 @@ import {ApiResult} from '../../../shared/vo/api-result';
 @Injectable({
   providedIn: 'root'
 })
-export class Astems04Service {
+export class Astems06Service {
 
   httpUrl = `${APPCONSTANTS.BASE_URL_WM}/master-service/user`;
 
@@ -163,3 +164,4 @@ export interface UserVO {
 
   userType: string;
 }
+

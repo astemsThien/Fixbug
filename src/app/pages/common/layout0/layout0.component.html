@@ -64,9 +64,12 @@
                 <dxi-item dataField="acceptKey" [label]="{text: '입고접수번호'}">
                     <!-- <dxi-validation-rule type="required" message="AcceptKey is required"></dxi-validation-rule> -->
                 </dxi-item>
+
                 <dxi-item dataField="rcvKey" [label]="{text: 'disabled TextBox'}"
                           [disabled]="true"></dxi-item>
+
                 <dxi-item dataField="rcvKey" [label]="{text: '접수유형'}"></dxi-item>
+
                 <dxi-item dataField="sts" [label]="{text: '접수유형'}" editorType="dxSelectBox"
                           [editorOptions]="{
                           items: dsAcceptType,

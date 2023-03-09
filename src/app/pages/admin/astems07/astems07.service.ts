@@ -1,4 +1,3 @@
-
 import {Injectable} from '@angular/core';
 import {APPCONSTANTS} from '../../../shared/constants/appconstants';
 import {JHttpService} from '../../../shared/services/jhttp.service';
@@ -8,7 +7,7 @@ import {ApiResult} from '../../../shared/vo/api-result';
 @Injectable({
   providedIn: 'root'
 })
-export class Astems04Service {
+export class Astems07Service {
 
   httpUrl = `${APPCONSTANTS.BASE_URL_WM}/master-service/user`;
 
@@ -48,6 +47,10 @@ export class Astems04Service {
       };
     }
   }
+  dsUserType = [
+    {code: 'BEST', name: 'BEST'},
+    {code: 'WORST', name: 'WORST'},
+  ]
   data1 = [
     {code: '10층교육장', name: '10층교육장'},
     {code: '8층테스트', name: '8층테스트'},
@@ -163,3 +166,4 @@ export interface UserVO {
 
   userType: string;
 }
+

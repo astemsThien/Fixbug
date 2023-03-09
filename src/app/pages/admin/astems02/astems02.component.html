@@ -14,8 +14,14 @@ type="default"
 (onClick)="onSave()">
 </dx-button>
 </span>
+
 <hr/>
+
 </div>
+
+
+
+<p class="showName {{anhien}}">Hello:{{textThu}}</p>
 
 
 
@@ -43,28 +49,22 @@ class="search-form-box"
     <dxi-item dataField="tenant" [label]="{text: 'Tenant'}" [visible]="false"
 [editorOptions]="{ value: G_TENANT }"></dxi-item>
 
-<dxi-item dataField="systemType"
-[label]="{text: utilService.convert1('카테고리', '카테고리')}"
-editorType="dxSelectBox"
-[editorOptions]="{  items: dsSystemType,
-displayExpr: 'display',
-valueExpr: 'code',
-searchMode:'contains',
-searchEnabled: false,
-openOnFieldClick: true,
-minSearchLength: 0,
-placeholder: '',
-onSelectionChanged: onSelectionChanged,
-noDataText: utilService.convert('com_txt_noDataText')
-}">
-<dxi-validation-rule type="required"></dxi-validation-rule>
-
+<dxi-item dataField="text1" 
+[label]="{text: utilService.convert1('카테고리', '카테고리')}">
 
 </dxi-item>
+
+<dxi-item dataField="text2" 
+[label]="{text: utilService.convert1('Show name', 'Show name')}">
+
+</dxi-item>
+
 <dxi-item dataField="text1" [label]="{text: utilService.convert1('카테고리 코드', '카테고리 코드')}">
 <dxi-validation-rule type="stringLength" [max]="30"
 message="어플리케이션코드는 30자 이하로 입력하세요."></dxi-validation-rule>
 </dxi-item>
+
+
 </dxi-item>
 </dx-form>
 <div class="search-btn-group">
@@ -74,8 +74,8 @@ type="form"
 class="search-btn"
 [focusStateEnabled]="false"
 [text]="utilService.convert('com_btn_search')"
-(onClick)="onShow($event)"
-(onClick)="onSearch()">
+(onClick)="onSearch()"
+>
 </dx-button>
 </div>
 </div>
@@ -157,20 +157,27 @@ columnResizingMode=nextColumn
 </dxo-pager>
 <dxo-state-storing [enabled]="true" type="custom" [customLoad]="loadState1"
 [customSave]="saveState1"></dxo-state-storing>
+
 <dxi-column dataField="uid" caption="UID" [visible]="false" [allowSearch]="false"
 [showInColumnChooser]="false" [allowEditing]="false"></dxi-column>
 <dxi-column dataField="tenant" caption="tenant" [visible]="false" [allowSearch]="false"
 [showInColumnChooser]="false" [allowEditing]="false"></dxi-column>
 <dxi-column dataField="items" caption="items" [visible]="false" [allowSearch]="false"
 [showInColumnChooser]="false" [allowEditing]="false"></dxi-column>
+
+
 <dxi-column dataField="text" [caption]="utilService.convert1('대분류 명', '대분류 명')"
 cssClass="grid-cell-required">
 </dxi-column>
+
 <dxi-column dataField="path" [caption]="utilService.convert1('대분류 코드', '대분류 코드')"
 cssClass="grid-cell-required">
 </dxi-column>
 <dxi-column dataField="priorities"
 [caption]="utilService.convert1('중분류 수', '중분류 수')"></dxi-column>
+
+<dxi-column dataField="userType" [caption]="utilService.convert1('phanquyen', '사용자타입')"
+    [allowEditing]="false"></dxi-column>
 </dx-data-grid>
 
 
@@ -304,6 +311,10 @@ cssClass="grid-cell-required">
 
 <dxi-column dataField="priorities"
 [caption]="utilService.convert1('상품 수', '상품 수')"></dxi-column>
+<dxi-column dataField="createdDatetime"
+                    [allowEditing]="false"
+                    [caption]="utilService.convert1('date', '작성일시')">
+        </dxi-column>
 
 
 

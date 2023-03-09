@@ -1,13 +1,10 @@
-
-
-
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {CommonUtilService} from '../../../shared/services/common-util.service';
 import DataSource from 'devextreme/data/data_source';
 import ArrayStore from 'devextreme/data/array_store';
 import {DxButtonComponent, DxDataGridComponent, DxPopupComponent} from 'devextreme-angular';
 import {DxFormComponent} from 'devextreme-angular/ui/form';
-import {Astems04Service, UserVO} from './astems04.service';
+import {Astems07Service, UserVO} from './astems07.service';
 import {CommonCodeService} from '../../../shared/services/common-code.service';
 import {CookieService} from 'ngx-cookie-service';
 import {GridUtilService} from '../../../shared/services/grid-util.service';
@@ -15,11 +12,11 @@ import {APPCONSTANTS} from '../../../shared/constants/appconstants';
 
 
 @Component({
-  selector: 'app-astems04',
-  templateUrl: './astems04.component.html',
-  styleUrls: ['./astems04.component.scss']
+  selector: 'app-astems07',
+  templateUrl: './astems07.component.html',
+  styleUrls: ['./astems07.component.scss']
 })
-export class Astems04Component implements OnInit {
+export class Astems07Component implements OnInit {
 
   @ViewChild('mainForm', {static: false}) mainForm: DxFormComponent;
   @ViewChild('mainGrid', {static: false}) mainGrid: DxDataGridComponent;
@@ -76,6 +73,7 @@ export class Astems04Component implements OnInit {
 
   // DataSets
   dsOwnerId = [];
+  // dsUserType = [];
   dsActFlg = [];
   dsCompany = [];
   dsUserGroup = [];
@@ -84,7 +82,8 @@ export class Astems04Component implements OnInit {
     changePassword: ''
   };
 
-
+  cities = [{name: 'BEST', code: 'BEST'}, {name: 'WORST', code: 'WORST'}];
+  dataset = [{name: '수량', code: '수량'}, {name: '금액', code: '금액'}];
   // Grid State
   GRID_STATE_KEY = 'mm_user1';
   loadState = this.gridUtil.fnGridLoadState(this.GRID_STATE_KEY);
@@ -93,9 +92,10 @@ export class Astems04Component implements OnInit {
   data2= this.service.data2;
   data3= this.service.data3;
   data4 = this.service.data4;
+  dsUserType = this.service.dsUserType;
 
   constructor(public utilService: CommonUtilService,
-              private service: Astems04Service,
+              private service: Astems07Service,
               private cookieService: CookieService,
               private codeService: CommonCodeService,
               public gridUtil: GridUtilService) {
@@ -170,6 +170,13 @@ export class Astems04Component implements OnInit {
     this.codeService.getUser(this.G_TENANT).subscribe(result => {
       this.dsUser = result.data;
     });
+
+    // const data = {tenant: this.G_TENANT};
+
+    // this.codeService.getItems(Object.assign(data, {codeCategory: 'USERTYPE'})).subscribe(result => {
+    //   this.dsUserType = result.data;
+    //   this.mainForm.formData.userType = this.dsUserType[0].code;
+    // });
   }
 
   async onSearch(): Promise<void> {

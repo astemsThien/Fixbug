@@ -54,6 +54,11 @@ import { Astems02Component } from './pages/admin/astems02/astems02.component';
 import { Astems03Component } from './pages/admin/astems03/astems03.component';
 import { Astems04Component } from './pages/admin/astems04/astems04.component';
 import { Astems05Component } from './pages/admin/astems05/astems05.component';
+import { Astems06Component } from './pages/admin/astems06/astems06.component';
+import { Astems07Component } from './pages/admin/astems07/astems07.component';
+import { Astems08Component } from './pages/admin/astems08/astems08.component';
+import { Astems09Component } from './pages/admin/astems09/astems09.component';
+import { Astems10Component } from './pages/admin/astems10/astems10.component';
 /* 관리자 */
 
 /* 화주 */
@@ -254,6 +259,31 @@ const routes: Routes = [
     {
       path: 'tr/admin/astems05',
       component: Astems05Component,
+      canActivate: [AuthGuardService]
+    },
+    {
+      path: 'tr/admin/astems06',
+      component: Astems06Component,
+      canActivate: [AuthGuardService]
+    },
+    {
+      path: 'tr/admin/astems07',
+      component: Astems07Component,
+      canActivate: [AuthGuardService]
+    },
+    {
+      path: 'tr/admin/astems08',
+      component: Astems08Component,
+      canActivate: [AuthGuardService]
+    },
+    {
+      path: 'tr/admin/astems09',
+      component: Astems09Component,
+      canActivate: [AuthGuardService]
+    },
+    {
+      path: 'tr/admin/astems10',
+      component: Astems10Component,
       canActivate: [AuthGuardService]
     },
     /* 관리자 */
