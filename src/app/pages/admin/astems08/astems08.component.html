@@ -1,1 +1,185 @@
-<p>astems08 works!</p>
+<!-- 공통 > 사용자 -->
+<!-- <div class="contents-header">
+    <dx-button #bookmarkBtn
+               class="bookmark-btn"
+               [icon]="'star'"
+               (onClick)="utilService.onBookmarkToggle(this.bookmarkBtn)">
+    </dx-button>
+    <h2 class="content-block page-title">{{utilService.convert1(pageInfo.path, '사용자')}}</h2>
+    <span class="page-breadcrumb">{{pageInfo.pathName}}</span>
+    <span class="btngroup page-button-group">
+      <dx-button icon="add"
+                 id="Open"
+                 type="default"
+                 [text]="utilService.convert1('com.btn.new', '신규')"
+                 (onClick)="onPopupOpen($event)">
+      </dx-button>
+    </span>
+    <hr/>
+  </div> -->
+
+  <div class="contents-body">
+    <div class="search_foldable">
+      <div class="search-box">
+        <dx-form
+          #mainForm
+          class="search-form-box"
+          [(formData)]="mainFormData"
+          [showColonAfterLabel]="false"
+          [colCountByScreen]="{lg:3}"
+        >
+          <dxi-item itemType="group" [colCount]="1" [colSpan]="1">
+            <dxi-item
+              dataField="tenant"
+              [label]="{ text: 'Tenant' }"
+              [visible]="false"
+              [editorOptions]="{ value: G_TENANT }">
+            </dxi-item>
+  
+            <dxi-item
+              itemType="group"
+              [label]="{ text: utilService.convert('조회일자') }"
+              cssClass="fromtocalendar"
+              [colCount]="2"
+              [colSpan]="1">
+            <dxi-item
+                dataField="fromShipSchDate"
+                editorType="dxDateBox"
+                cssClass="fromcalendar"
+                [label]="{ visible: false }"
+                [editorOptions]="{
+                  useMaskBehavior: 'true',
+                  displayFormat: 'yyyy-MM-dd',
+                  dateSerializationFormat: 'yyyy-MM-dd',
+                  placeholder: '2023-02-26'
+                }">
+              </dxi-item>
+              <dxi-item
+                dataField="toShipSchDate"
+                editorType="dxDateBox"
+                cssClass="tocalendar"
+                [label]="{ text: '~' }"
+                [editorOptions]="{
+                  useMaskBehavior: 'true',
+                  displayFormat: 'yyyy-MM-dd',
+                  dateSerializationFormat: 'yyyy-MM-dd',
+                  placeholder: '2023-03-08'
+                }"
+              >
+              </dxi-item>
+            </dxi-item>
+          </dxi-item>
+          <dxi-item itemType="group" [colCount]="1" [colSpan]="1" >
+            <dxi-item itemType="group" [colCount]="1" [colSpan]="1" dataField="조 직">
+                <dxi-item dataField="name1"
+                [label]="{ visible: false }"
+              editorType="dxSelectBox"
+              [editorOptions]="{
+                items: data2,
+                displayExpr: 'name',
+                valueExpr: 'code',
+                searchMode: 'contains',
+                searchEnabled: true,
+                showClearButton: true,
+                openOnFieldClick: false,
+                minSearchLength: 0,
+                placeholder: '',
+                noDataText: utilService.convert('com_txt_noDataText')
+              }"
+            >
+                </dxi-item>
+               
+            </dxi-item>
+          </dxi-item>
+        </dx-form>
+  
+
+
+        <div class="search-btn-group">
+            <dx-button
+              type="form"
+              class="search-btn"
+              [text]="utilService.convert1('조 회', '초기화')"
+              [focusStateEnabled]="false"
+              (onClick)="onSearch()"
+            >
+            </dx-button>
+            <dx-button
+              type="form"
+              class="search-btn"
+              [text]="utilService.convert1('엑 셀', '조회')"
+              [focusStateEnabled]="false"
+            >
+            </dx-button>
+        </div>
+      </div>
+    </div>
+    <dx-accordion
+      [collapsible]="true"
+      [multiple]="true"
+      [animationDuration]="300">
+      <dxi-item>
+        <dx-data-grid
+          #mainGrid
+          [allowColumnResizing]="true"
+          [allowColumnReordering]="true"
+          [columnAutoWidth]="false"
+          [focusedRowEnabled]="true"
+          [focusStateEnabled]="true"
+          [rowAlternationEnabled]="true"
+          [showRowLines]="true"
+          (onExporting)="gridUtil.onPageExportXlsx($event)"
+          columnResizingMode="nextColumn">
+          <dxo-search-panel [visible]="true" [width]="240" [placeholder]="''"></dxo-search-panel>
+  
+          <dxi-column dataField="NO" [width]="100"></dxi-column>
+          <dxi-column dataField="매장" [width]="350"></dxi-column>
+          <dxi-column [caption]="utilService.convert1('입 금', '옵션')" [width]="100">
+            <dxi-column dataField="수량" alignment="center" ></dxi-column>
+            <dxi-column dataField="금액" alignment="center" ></dxi-column>
+          </dxi-column>
+          <dxi-column [caption]="utilService.convert1('컵보증금', '옵션')" [width]="100">
+            <dxi-column dataField="수량" alignment="center" ></dxi-column>
+            <dxi-column dataField="금액" alignment="center" ></dxi-column>
+          </dxi-column>
+          <dxi-column [caption]="utilService.convert1('컵환급금', '옵션')" [width]="100">
+            <dxi-column dataField="수량" alignment="center" ></dxi-column>
+            <dxi-column dataField="금액" alignment="center" ></dxi-column>
+          </dxi-column>
+        </dx-data-grid>
+
+
+
+        <dx-data-grid
+          #mainGrid
+          [allowColumnResizing]="true"
+          [allowColumnReordering]="true"
+          [columnAutoWidth]="false"
+          [focusedRowEnabled]="true"
+          [focusStateEnabled]="true"
+          [rowAlternationEnabled]="true"
+          [showRowLines]="true"
+          (onExporting)="gridUtil.onPageExportXlsx($event)"
+          columnResizingMode="nextColumn">
+          <dxo-search-panel [visible]="true" [width]="240" [placeholder]="''"></dxo-search-panel>
+  
+          <dxi-column dataField="NO" [width]="100"></dxi-column>
+          <dxi-column dataField="매장" [width]="300"></dxi-column>
+          <dxi-column dataField="POS번호" [width]="150"></dxi-column>
+          <dxi-column [caption]="utilService.convert1('입 금', '옵션')" [width]="100">
+            <dxi-column dataField="수량" alignment="center" ></dxi-column>
+            <dxi-column dataField="금액" alignment="center" ></dxi-column>
+          </dxi-column>
+          <dxi-column [caption]="utilService.convert1('컵보증금', '옵션')" [width]="100">
+            <dxi-column dataField="수량" alignment="center" ></dxi-column>
+            <dxi-column dataField="금액" alignment="center" ></dxi-column>
+          </dxi-column>
+          <dxi-column [caption]="utilService.convert1('컵환급금', '옵션')" [width]="100">
+            <dxi-column dataField="수량" alignment="center" ></dxi-column>
+            <dxi-column dataField="금액" alignment="center" ></dxi-column>
+          </dxi-column>
+        </dx-data-grid>
+      </dxi-item>
+    </dx-accordion>
+  </div>
+  

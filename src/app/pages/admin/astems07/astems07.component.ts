@@ -4,11 +4,12 @@ import DataSource from 'devextreme/data/data_source';
 import ArrayStore from 'devextreme/data/array_store';
 import {DxButtonComponent, DxDataGridComponent, DxPopupComponent} from 'devextreme-angular';
 import {DxFormComponent} from 'devextreme-angular/ui/form';
-import {Astems07Service, UserVO} from './astems07.service';
+import {Astems07Service, UserVO,MenuSearchVO} from './astems07.service';
 import {CommonCodeService} from '../../../shared/services/common-code.service';
 import {CookieService} from 'ngx-cookie-service';
 import {GridUtilService} from '../../../shared/services/grid-util.service';
 import {APPCONSTANTS} from '../../../shared/constants/appconstants';
+import { values } from 'lodash';
 
 
 @Component({
@@ -53,11 +54,12 @@ export class Astems07Component implements OnInit {
 
   // Global
   G_TENANT: any;
+  RadioG: any;
   pageInfo: any = this.utilService.getPageInfo();
 
   // ***** main ***** //
   // Form
-  mainFormData = {};
+  mainFormData: MenuSearchVO = {} as MenuSearchVO;
 
   // Grid
   mainGridDataSource: DataSource;
@@ -81,8 +83,12 @@ export class Astems07Component implements OnInit {
   pwdPopupData = {
     changePassword: ''
   };
+  
+
+  
 
   cities = [{name: 'BEST', code: 'BEST'}, {name: 'WORST', code: 'WORST'}];
+  
   dataset = [{name: '수량', code: '수량'}, {name: '금액', code: '금액'}];
   // Grid State
   GRID_STATE_KEY = 'mm_user1';
@@ -94,6 +100,8 @@ export class Astems07Component implements OnInit {
   data4 = this.service.data4;
   dsUserType = this.service.dsUserType;
 
+  
+
   constructor(public utilService: CommonUtilService,
               private service: Astems07Service,
               private cookieService: CookieService,
@@ -103,7 +111,6 @@ export class Astems07Component implements OnInit {
     this.pwdPopupSaveClick = this.pwdPopupSaveClick.bind(this);
     this.pwdPopupCancelClick = this.pwdPopupCancelClick.bind(this);
     this.resetPassword = this.resetPassword.bind(this);
-
     this.addPopupClose = this.addPopupClose.bind(this);
     this.addPopupClose2 = this.addPopupClose2.bind(this);
     this.addCard = this.addCard.bind(this);
@@ -121,6 +128,7 @@ export class Astems07Component implements OnInit {
     // };
 
   }
+
 
   ngOnInit(): void {
     this.G_TENANT = this.utilService.getTenant();
@@ -179,13 +187,25 @@ export class Astems07Component implements OnInit {
     // });
   }
 
+
+
   async onSearch(): Promise<void> {
     const data = this.mainForm.instance.validate();
-
+   
     if (data.isValid) {
       const result = await this.service.get(this.mainFormData);
+      
 
       if (this.resultMsgCallback(result, 'Search')) {
+       
+        const radioG1 = this.mainFormData.radio1;
+        const radioG2 = this.mainFormData.radio2;
+        const name1 = this.mainFormData.name1;
+        const name2 = this.mainFormData.name2;
+        const name3 = this.mainFormData.name3;
+        const name4 = this.mainFormData.name4;
+
+        console.log(radioG1, radioG2, name1, name2, name3, name4);
 
         this.mainEntityStore = new ArrayStore(
           {
@@ -204,6 +224,23 @@ export class Astems07Component implements OnInit {
       }
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -151,6 +151,16 @@ export class Astems07Service {
 }
 
 
+export interface MenuSearchVO {
+  radio1: string;
+  radio2: string;
+  name1: string;
+  name2: string;
+  name3: string;
+  name4: string;
+}
+
+
 export interface UserVO {
   tenant: string;
   uid: number;
@@ -165,5 +175,6 @@ export interface UserVO {
   email: string;
 
   userType: string;
+  
 }
 
