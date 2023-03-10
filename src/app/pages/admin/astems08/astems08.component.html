@@ -84,17 +84,11 @@
                 openOnFieldClick: false,
                 minSearchLength: 0,
                 placeholder: '',
-                noDataText: utilService.convert('com_txt_noDataText')
-              }"
-            >
+                noDataText: utilService.convert('com_txt_noDataText')}">
                 </dxi-item>
-               
             </dxi-item>
           </dxi-item>
         </dx-form>
-  
-
-
         <div class="search-btn-group">
             <dx-button
               type="form"
@@ -120,7 +114,6 @@
       [animationDuration]="300">
       <dxi-item>
         <dx-data-grid
-          #mainGrid
           [allowColumnResizing]="true"
           [allowColumnReordering]="true"
           [columnAutoWidth]="false"

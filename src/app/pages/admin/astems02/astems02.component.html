@@ -14,26 +14,9 @@ type="default"
 (onClick)="onSave()">
 </dx-button>
 </span>
-
 <hr/>
-
 </div>
-
-
-
 <p class="showName {{anhien}}">Hello:{{textThu}}</p>
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="contents-body">
 <div class="search_foldable">
 <div class="search-box">
@@ -86,36 +69,12 @@ class="search-btn"
 </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <dx-accordion [collapsible]="true" [(visible)]="popupVisible" 
 [multiple]="true"
 [animationDuration]="300">
 <dxi-item [title]="utilService.convert1('상품분류', '상품분류')">
 <div class="flex-container">
 
-
-
-
-    
-    
 <dx-data-grid
 #grid1
 [dataSource]="dataSource1"

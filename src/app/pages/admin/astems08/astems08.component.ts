@@ -66,6 +66,7 @@ export class Astems08Component implements OnInit {
   // Grid
   mainGridDataSource: DataSource;
   mainEntityStore: ArrayStore;
+  dataSource1 =[{name: 'Key hết rồi nạp tiền đi '}] ;
   key = 'uid';
   // ***** main ***** //
 
@@ -82,10 +83,11 @@ export class Astems08Component implements OnInit {
   dsCompany = [];
   dsUserGroup = [];
   dsUser = [];
+
   pwdPopupData = {
     changePassword: ''
   };
-  
+  public datas ="Hello"
 
   
 
