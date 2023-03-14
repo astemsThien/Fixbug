@@ -1,0 +1,252 @@
+<!-- 공통 > 사용자 -->
+<!-- <div class="contents-header">
+    <dx-button #bookmarkBtn
+               class="bookmark-btn"
+               [icon]="'star'"
+               (onClick)="utilService.onBookmarkToggle(this.bookmarkBtn)">
+    </dx-button>
+    <h2 class="content-block page-title">{{utilService.convert1(pageInfo.path, '사용자')}}</h2>
+    <span class="page-breadcrumb">{{pageInfo.pathName}}</span>
+    <span class="btngroup page-button-group">
+      <dx-button icon="add"
+                 id="Open"
+                 type="default"
+                 [text]="utilService.convert1('com.btn.new', '신규')"
+                 (onClick)="onPopupOpen($event)">
+      </dx-button>
+    </span>
+    <hr/>
+  </div> -->
+
+  <div class="contents-body">
+    <div class="search_foldable">
+      <div class="search-box">
+        <dx-form
+            #mainForm
+            class="search-form-box"
+            [(formData)]="mainFormData"
+            [showColonAfterLabel]="false"
+            [colCountByScreen]="{lg:14}">
+            <dxi-item itemType="group" [colCount]="1" [colSpan]="2">
+                <dxi-item itemType="group" [label]="{ text: utilService.convert('조회일자') }" cssClass="fromtocalendar" [colCount]="2" [colSpan]="1">
+                    <dxi-item
+                        dataField="fromShipSchDate"
+                        editorType="dxDateBox"
+                        cssClass="fromcalendar"
+                        [label]="{ visible: false }"
+                        [editorOptions]="{
+                        useMaskBehavior: 'true',
+                        displayFormat: 'yyyy-MM-dd',
+                        dateSerializationFormat: 'yyyy-MM-dd',
+                        placeholder: '2023-03-14'}">
+                    </dxi-item>
+                </dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" [colCount]="1" [colSpan]="5">
+                <dxi-item itemType="group" [colCount]="3" [colSpan]="1" dataField="본부/사업부/매장">
+                    <dxi-item dataField="name1"
+                    [label]="{ visible: false }"
+                    cssClass="fromcalendar"
+                  editorType="dxSelectBox"
+                  [editorOptions]="{
+                    items: data2,
+                    displayExpr: 'name',
+                    valueExpr: 'code',
+                    searchMode: 'contains',
+                    searchEnabled: true,
+                    showClearButton: true,
+                    openOnFieldClick: false,
+                    minSearchLength: 0,
+                    placeholder: '선 택',
+                    noDataText: utilService.convert('com_txt_noDataText')}">
+                    </dxi-item>
+                    <dxi-item dataField="name2"
+                    [label]="{ visible: false }"
+                        cssClass="fromcalendar"
+                        editorType="dxSelectBox"
+                  [editorOptions]="{
+                    items: data2,
+                    displayExpr: 'name',
+                    valueExpr: 'code',
+                    searchMode: 'contains',
+                    searchEnabled: true,
+                    showClearButton: true,
+                    openOnFieldClick: false,
+                    minSearchLength: 0,
+                    placeholder: '선 택',
+                    noDataText: utilService.convert('com_txt_noDataText')}">
+                    </dxi-item>
+                    <dxi-item dataField="name3"
+                    [label]="{ visible: false }"
+                        cssClass="fromcalendar"
+                        editorType="dxSelectBox"
+                  [editorOptions]="{
+                    items: data2,
+                    displayExpr: 'name',
+                    valueExpr: 'code',
+                    searchMode: 'contains',
+                    searchEnabled: true,
+                    showClearButton: true,
+                    openOnFieldClick: false,
+                    minSearchLength: 0,
+                    placeholder: '선 택',
+                    noDataText: utilService.convert('com_txt_noDataText')}">
+                    </dxi-item>
+                </dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" [colCount]="1" [colSpan]="3">
+                <dxi-item itemType="group" [colCount]="1" [colSpan]="1" dataField="구분">
+                    <dxi-item dataField="name4"
+                    [label]="{ visible: false }"
+                        cssClass="fromcalendar"
+                        editorType="dxSelectBox"
+                  [editorOptions]="{
+                    items: data2,
+                    displayExpr: 'name',
+                    valueExpr: 'code',
+                    searchMode: 'contains',
+                    searchEnabled: true,
+                    showClearButton: true,
+                    openOnFieldClick: false,
+                    minSearchLength: 0,
+                    placeholder: '선 택',
+                    noDataText: utilService.convert('com_txt_noDataText')}">
+                    </dxi-item>
+                </dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" [colCount]="1" [colSpan]="4">
+                <dxi-item itemType="group" [colCount]="3" [colSpan]="1" dataField="정열방법">
+                    <dxi-item dataField="name5"
+                    [label]="{ visible: false }"
+                        cssClass="fromcalendar"
+                        editorType="dxSelectBox"
+                  [editorOptions]="{
+                    items: data2,
+                    displayExpr: 'name',
+                    valueExpr: 'code',
+                    searchMode: 'contains',
+                    searchEnabled: true,
+                    showClearButton: true,
+                    openOnFieldClick: false,
+                    minSearchLength: 0,
+                    placeholder: '선 택',
+                    noDataText: utilService.convert('com_txt_noDataText')}">
+                    </dxi-item>
+                    <dxi-item dataField="name6"
+                    [label]="{ visible: false }"
+                        cssClass="fromcalendar"
+                        editorType="dxSelectBox"
+                  [editorOptions]="{
+                    items: data2,
+                    displayExpr: 'name',
+                    valueExpr: 'code',
+                    searchMode: 'contains',
+                    searchEnabled: true,
+                    showClearButton: true,
+                    openOnFieldClick: false,
+                    minSearchLength: 0,
+                    placeholder: '선 택',
+                    noDataText: utilService.convert('com_txt_noDataText')}">
+                    </dxi-item>
+                    <dxi-item itemType="group" [label]="{ text: utilService.convert('* 임의등록') }" class="textcol"></dxi-item>
+
+                </dxi-item>
+            </dxi-item>
+        </dx-form>
+        <div class="search-btn-group">
+            <dx-button
+              type="form"
+              class="search-btn"
+              [text]="utilService.convert1('조 회', '초기화')"
+              [focusStateEnabled]="false"
+              (onClick)="onSearch()"
+            >
+            </dx-button>
+            <dx-button
+              type="form"
+              class="search-btn"
+              [text]="utilService.convert1('엑 셀', '조회')"
+              [focusStateEnabled]="false"
+            >
+            </dx-button>
+        </div>
+      </div>
+    </div>
+    <dx-accordion
+      [collapsible]="true"
+      [multiple]="true"
+      [animationDuration]="300">
+      
+          <dxi-item class="double">
+        <dx-data-grid
+          [allowColumnResizing]="true"
+          [allowColumnReordering]="true"
+          [columnAutoWidth]="false"
+          [focusedRowEnabled]="true"
+          [focusStateEnabled]="true"
+          [rowAlternationEnabled]="true"
+          [width]="400"
+          [showRowLines]="true"
+          (onExporting)="gridUtil.onPageExportXlsx($event)"
+          columnResizingMode="nextColumn">
+          <dxi-column dataField="No"></dxi-column>
+          <dxi-column dataField="매장명"></dxi-column>
+          <dxi-column [caption]="utilService.convert1('영수', '옵션')">
+            <dxi-column dataField="번호"></dxi-column>
+          </dxi-column>
+          <dxi-column dataField="고객명"></dxi-column>
+        </dx-data-grid>
+        <dx-data-grid
+        [allowColumnResizing]="true"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [focusedRowEnabled]="true"
+        [focusStateEnabled]="true"
+        [rowAlternationEnabled]="true"
+        [width]="1200"
+        [showRowLines]="true"
+        (onExporting)="gridUtil.onPageExportXlsx($event)"
+        columnResizingMode="nextColumn">
+        <dxi-column dataField="테이블명	"></dxi-column>
+        <dxi-column dataField="매출시간"></dxi-column>
+        <dxi-column dataField="결제시간"></dxi-column>
+        <dxi-column dataField="주기시간"></dxi-column>
+        <dxi-column dataField="매출구분"></dxi-column>
+        <dxi-column dataField="총매출액"></dxi-column>
+        <dxi-column dataField="순매출액"></dxi-column>
+        <dxi-column dataField="부가세"></dxi-column>
+        <dxi-column dataField="봉사료"></dxi-column>
+        <dxi-column dataField="할 인"></dxi-column>
+
+        <dxi-column [caption]="utilService.convert1('고객수', '옵션')">
+            <dxi-column dataField="내국" alignment="center" ></dxi-column>
+            <dxi-column dataField="외국" alignment="center" ></dxi-column>
+        </dxi-column>
+
+        <dxi-column dataField="티머니"></dxi-column>
+        <dxi-column dataField="캐시비"></dxi-column>
+        <dxi-column dataField="현 금"></dxi-column>
+
+        <dxi-column [caption]="utilService.convert1('카 드', '옵션')">
+            <dxi-column dataField="카드매출" alignment="center" ></dxi-column>
+            <dxi-column dataField="카드사" alignment="center" ></dxi-column>
+        </dxi-column>
+
+        <dxi-column dataField="포인트"></dxi-column>
+
+        <dxi-column [caption]="utilService.convert1('상품권', '옵션')">
+            <dxi-column dataField="상품권매출" alignment="center" ></dxi-column>
+            <dxi-column dataField="현금환불" alignment="center" ></dxi-column>
+            <dxi-column dataField="상품권환불" alignment="center" ></dxi-column>
+        </dxi-column>
+
+        <dxi-column dataField="외 상"></dxi-column>
+        <dxi-column dataField="OK캐쉬백"></dxi-column>
+        <dxi-column dataField="선불카드"></dxi-column>
+        <dxi-column dataField="기타"></dxi-column>
+        <dxi-column dataField="간편결제"></dxi-column>
+      </dx-data-grid>
+      </dxi-item>
+    </dx-accordion>
+  </div>
+  

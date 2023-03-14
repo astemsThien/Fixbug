@@ -18,6 +18,8 @@ import {APPCONSTANTS} from '../../../shared/constants/appconstants';
 import { ArrayType } from '@angular/compiler';
 import { result } from 'lodash';
 import * as path from 'path';
+import { text } from 'stream/consumers';
+import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-astems02',
@@ -42,6 +44,7 @@ export class Astems02Component implements OnInit {
   G_TENANT: any;
 
   // public showName = "an";
+  public inputText1 = '';
 
   mainFormData: MenuSearchVO = {} as MenuSearchVO;
 
@@ -66,6 +69,8 @@ export class Astems02Component implements OnInit {
 public textThu ='';
 
 public anhien = 'an';
+
+public bienmat = ' '
 
   GRID_STATE_KEY = 'mm_mmenu1';
   saveState1 = this.gridUtil.fnGridSaveState(this.GRID_STATE_KEY + '_1');
@@ -119,7 +124,11 @@ public anhien = 'an';
     this.dataSource1 = new DataSource({
       store: this.entityStore1
     });
+
+
   }
+
+  
 
   ngAfterViewInit(): void {
     this.bookmarkBtn.instance.option('icon', 'star');
@@ -133,16 +142,17 @@ public anhien = 'an';
     this.utilService.getGridHeight(this.grid3);
   }
 
+  
   // async onShow(e): Promise<void> {
   //   this.popupVisible = true;
   // }
 
   // 조회
+
   async onSearch(): Promise<void>{
     this.dataSource1 = this.initGridWithEntityStore(this.entityStore1);
     this.dataSource2 = this.initGridWithEntityStore(this.entityStore2);
     this.dataSource3 = this.initGridWithEntityStore(this.entityStore3);
-
 
     this.changes1 = [];
     this.changes2 = [];
@@ -150,11 +160,12 @@ public anhien = 'an';
     const data = this.mainForm.instance.validate();
 
     const inputText2 = this.mainFormData.text2;
-console.log(inputText2);
+// console.log(inputText2);
 
     if (data.isValid) {
       const result = await this.service.getL1(this.mainFormData);
-
+      
+      
       if (!result.success) {
         this.utilService.notify_error(result.msg);
         return;
@@ -162,7 +173,7 @@ console.log(inputText2);
         // so sanh gia tri nhap vao va hien thi thong bao
         if (this.mainFormData.text1?.length && this.mainFormData.text1.trim() !== '') {
           alert('Show you now: ' + this.mainFormData.text1);
-        this.utilService.notify_success('search success');
+        // this.utilService.notify_success('search success');
 
         }
         // show anme va an hiện text
@@ -178,7 +189,7 @@ console.log(inputText2);
                     this.anhien = 'an';
 
                 }
-
+                
         this.grid1.instance.cancelEditData();
         this.popupVisible = true;
         this.entityStore1 = new ArrayStore(
@@ -187,12 +198,13 @@ console.log(inputText2);
             key: this.key
           }
         );
-      
+
+        
         this.dataSource1 = new DataSource({
           store: this.entityStore1
         });
 
-        
+        // this.dataSource1 = DataAnalyst        
         this.grid1.focusedRowKey = null;
         this.grid1.paging.pageIndex = 0;
      
@@ -207,6 +219,7 @@ console.log(inputText2);
     }
     const result = await this.service.getL2(searchVO);
 
+    
     if (!result.success) {
       this.utilService.notify_error(result.msg);
       return;
@@ -467,18 +480,23 @@ console.log(inputText2);
     }
   }
 
+
   // 그리드 셀 이동시 호출하는 함수
   onFocusedCellChanging1(e): void {
-    this.setFocusRow(this.grid1, e.rowIndex);
+    this.setFocusRow(this.grid1, e.rowIndex);    
   }
-
   onFocusedRowChanging1(e): void {
-    this.initGrid();
-    if (e.rowIndex < 0 || !e.row || typeof e.row.data.uid === 'string') {
+    // this.initGrid();
+    if (e.rowIndex < 0 || !e.row || typeof e.row.data.uid === 'string' ) {
       return;
     } else {
       this.onSearchL2(e.row.data);
+
+      const DataAnalyst = e.row.data.text
+      this.mainFormData.text1 = DataAnalyst;
+      
     }
+   
   }
 
   onFocusedCellChanging2(e): void {

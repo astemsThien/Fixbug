@@ -29645,6 +29645,12 @@ app-root {
   font-weight: 500;
 }
 
+.dx-field-item-help-text, .dx-field-item-label-texts {
+  color: #0d0c22;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
 .dx-field-item-label-location-left {
   padding-right: 8px;
 }

@@ -17,6 +17,11 @@ import { Astems07Component } from './astems07/astems07.component';
 import { Astems08Component } from './astems08/astems08.component';
 import { Astems09Component } from './astems09/astems09.component';
 import { Astems10Component } from './astems10/astems10.component';
+import { Astems11Component } from './astems11/astems11.component';
+import { Astems12Component } from './astems12/astems12.component';
+import { Astems13Component } from './astems13/astems13.component';
+import { Astems14Component } from './astems14/astems14.component';
+import { Astems15Component } from './astems15/astems15.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +39,12 @@ import { Astems10Component } from './astems10/astems10.component';
     Astems07Component,
     Astems08Component,
     Astems09Component,
-    Astems10Component
+    Astems10Component,
+    Astems11Component,
+    Astems12Component,
+    Astems13Component,
+    Astems14Component,
+    Astems15Component
   ],
   imports: [
     DevExtremeModule,
